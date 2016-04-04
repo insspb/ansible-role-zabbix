@@ -1,3 +1,9 @@
+- include_vars: "{{ item }}"
+  with_items:
+    - "zabbix_agent.yml"
+    - "zabbix_proxy.yml"
+    - "zabbix_server.yml"
+    
 - include: pkg-CentOs.yml
   when: ansible_os_family == "RedHat"
 
