@@ -42,7 +42,9 @@ DebugLevel={{ zabbix_agent_DebugLevel }}
 ### Option: SourceIP
 #	Source IP address for outgoing connections.
 #
+{% if zabbix_agent_SourceIP %}
 SourceIP={{ zabbix_agent_SourceIP }}
+{% endif %}
 
 ### Option: EnableRemoteCommands
 #	Whether remote commands from Zabbix server are allowed.
@@ -121,7 +123,9 @@ HostnameItem={{ zabbix_agent_HostnameItem }}
 #
 # Range: 0-255 characters
 #
+{% if zabbix_agent_HostMetadata %}
 HostMetadata={{ zabbix_agent_HostMetadata }}
+{% endif %}
 
 ### Option: HostMetadataItem
 #	Optional parameter that defines an item used for getting host metadata.
@@ -130,7 +134,9 @@ HostMetadata={{ zabbix_agent_HostMetadata }}
 #	the value returned by specified item is over limit of 255 characters.
 #	This option is only used when HostMetadata is not defined.
 #
+{% if zabbix_agent_HostMetadataItem %}
 HostMetadataItem={{ zabbix_agent_HostMetadataItem }}
+{% endif %}
 
 ### Option: RefreshActiveChecks
 #	How often list of active checks is refreshed, in seconds.
@@ -233,7 +239,9 @@ UnsafeUserParameters={{ zabbix_agent_UnsafeUserParameters }}
 #	Format: UserParameter=<key>,<shell command>
 #	See 'zabbix_agentd' directory for examples.
 #
-UserParameter={{ zabbix_agent_UserParameter }}
+{% for parameter in zabbix_agent_UserParameter %}
+UserParameter={{ parameter }}
+{% endfor %}
 
 ####### LOADABLE MODULES #######
 
@@ -249,7 +257,9 @@ LoadModulePath={{ zabbix_agent_LoadModulePath }}
 #	The modules must be located in directory specified by LoadModulePath.
 #	It is allowed to include multiple LoadModule parameters.
 #
-LoadModule={{ zabbix_agent_LoadModule }}
+{% for module in zabbix_agent_LoadModule %}
+LoadModule={{ module }}
+{% endfor %}
 
 ####### TLS-RELATED PARAMETERS #######
 
@@ -279,39 +289,55 @@ TLSAccept={{ zabbix_agent_TLSAccept }}
 #	Full pathname of a file containing the top-level CA(s) certificates for
 #	peer certificate verification.
 #
+{% if zabbix_agent_TLSCAFile %}
 TLSCAFile={{ zabbix_agent_TLSCAFile }}
+{% endif %}
 
 ### Option: TLSCRLFile
 #	Full pathname of a file containing revoked certificates.
 #
+{% if zabbix_agent_TLSCRLFile %}
 TLSCRLFile={{ zabbix_agent_TLSCRLFile }}
+{% endif %}
 
 ### Option: TLSServerCertIssuer
 #      Allowed server certificate issuer.
 #
+{% if zabbix_agent_TLSServerCertIssuer %}
 TLSServerCertIssuer={{ zabbix_agent_TLSServerCertIssuer }}
+{% endif %}
 
 ### Option: TLSServerCertSubject
 #      Allowed server certificate subject.
 #
+{% if zabbix_agent_TLSServerCertSubject %}
 TLSServerCertSubject={{ zabbix_agent_TLSServerCertSubject }}
+{% endif %}
 
 ### Option: TLSCertFile
 #	Full pathname of a file containing the agent certificate or certificate chain.
 #
+{% if zabbix_agent_TLSCertFile %}
 TLSCertFile={{ zabbix_agent_TLSCertFile }}
+{% endif %}
 
 ### Option: TLSKeyFile
 #	Full pathname of a file containing the agent private key.
 #
+{% if zabbix_agent_TLSKeyFile %}
 TLSKeyFile={{ zabbix_agent_TLSKeyFile }}
+{% endif %}
 
 ### Option: TLSPSKIdentity
 #	Unique, case sensitive string used to identify the pre-shared key.
 #
+{% if zabbix_agent_TLSPSKIdentity %}
 TLSPSKIdentity={{ zabbix_agent_TLSPSKIdentity }}
+{% endif %}
 
 ### Option: TLSPSKFile
 #	Full pathname of a file containing the pre-shared key.
 #
+{% if zabbix_agent_TLSPSKFile %}
 TLSPSKFile={{ zabbix_agent_TLSPSKFile }}
+{% endif %}
