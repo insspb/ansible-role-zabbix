@@ -14,7 +14,9 @@ ListenPort={{ zabbix_server_ListenPort }}
 ### Option: SourceIP
 #	Source IP address for outgoing connections.
 #
+{% if zabbix_server_SourceIP %}
 SourceIP={{ zabbix_server_SourceIP }}
+{% endif %}
 
 ### Option: LogType
 #	Specifies where log messages are written to:
@@ -72,12 +74,12 @@ DBHost={{ zabbix_server_DBHost }}
 #
 DBName={{ zabbix_server_DBName }}
 
-DBName=zabbix
-
 ### Option: DBSchema
 #	Schema name. Used for IBM DB2 and PostgreSQL.
 #
+{% if zabbix_server_DBSchema %}
 DBSchema={{ zabbix_server_DBSchema }}
+{% endif %}
 
 ### Option: DBUser
 #	Database user. Ignored for SQLite.
@@ -88,7 +90,9 @@ DBUser={{ zabbix_server_DBUser }}
 #	Database password. Ignored for SQLite.
 #	Comment this line if no password is used.
 #
+{% if zabbix_server_DBPassword %}
 DBPassword={{ zabbix_server_DBPassword }}
+{% endif %}
 
 ### Option: DBSocket
 #	Path to MySQL socket.
@@ -188,7 +192,9 @@ StartEscalators={{ zabbix_server_StartEscalators }}
 #	IP address (or hostname) of Zabbix Java gateway.
 #	Only required if Java pollers are started.
 #
+{% if zabbix_server_JavaGateway %}
 JavaGateway={{ zabbix_server_JavaGateway }}
+{% endif %}
 
 ### Option: JavaGatewayPort
 #	Port that Zabbix Java gateway listens on.
@@ -436,7 +442,9 @@ Fping6Location={{ zabbix_server_Fping6Location }}
 ### Option: SSHKeyLocation
 #	Location of public and private keys for SSH checks and actions.
 #
+{% if zabbix_server_SSHKeyLocation %}
 SSHKeyLocation={{ zabbix_server_SSHKeyLocation }}
+{% endif %}
 
 ### Option: LogSlowQueries
 #	How long a database query may take before being logged (in milliseconds).
@@ -519,7 +527,9 @@ SSLKeyLocation={{ zabbix_server_SSLKeyLocation }}
 #	If not set, system-wide directory will be used.
 #	This parameter is used only in web monitoring and SMTP authentication.
 #
+{% if zabbix_server_SSLCALocation %}
 SSLCALocation={{ zabbix_server_SSLCALocation }}
+{% endif %}
 
 ####### LOADABLE MODULES #######
 
@@ -535,7 +545,9 @@ LoadModulePath={{ zabbix_server_LoadModulePath }}
 #	The modules must be located in directory specified by LoadModulePath.
 #	It is allowed to include multiple LoadModule parameters.
 #
-LoadModule={{ zabbix_server_LoadModule }}
+{% for module in zabbix_server_LoadModule %}
+LoadModule={{ module }}
+{% endfor %}
 
 ####### TLS-RELATED PARAMETERS #######
 
@@ -543,19 +555,27 @@ LoadModule={{ zabbix_server_LoadModule }}
 #	Full pathname of a file containing the top-level CA(s) certificates for
 #	peer certificate verification.
 #
+{% if zabbix_server_TLSCAFile %}
 TLSCAFile={{ zabbix_server_TLSCAFile }}
+{% endif %}
 
 ### Option: TLSCRLFile
 #	Full pathname of a file containing revoked certificates.
 #
+{% if zabbix_server_TLSCRLFile %}
 TLSCRLFile={{ zabbix_server_TLSCRLFile }}
+{% endif %}
 
 ### Option: TLSCertFile
 #	Full pathname of a file containing the server certificate or certificate chain.
 #
+{% if zabbix_server_TLSCertFile %}
 TLSCertFile={{ zabbix_server_TLSCertFile }}
+{% endif %}
 
 ### Option: TLSKeyFile
 #	Full pathname of a file containing the server private key.
 #
+{% if zabbix_server_TLSKeyFile %}
 TLSKeyFile={{ zabbix_server_TLSKeyFile }}
+{% endif %}
