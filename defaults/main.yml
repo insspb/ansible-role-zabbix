@@ -6,3 +6,7 @@ zabbix_install_agent: yes
 zabbix_install_version: "3.0"
 zabbix_server_db_type: "mysql"
 zabbix_proxy_db_type: "mysql"
+
+include: zabbix_agent.yml
+include: zabbix_server.yml
+include: zabbix_proxy.yml
