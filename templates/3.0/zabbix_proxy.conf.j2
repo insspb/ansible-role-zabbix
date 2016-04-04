@@ -50,7 +50,9 @@ ListenPort={{ zabbix_proxy_ListenPort }}
 ### Option: SourceIP
 #   Source IP address for outgoing connections.
 #
+{% if zabbix_proxy_SourceIP %}
 SourceIP={{ zabbix_proxy_SourceIP }}
+{% endif %}
 
 ### Option: LogType
 #   Specifies where log messages are written to:
@@ -110,7 +112,9 @@ DBName={{ zabbix_proxy_DBName }}
 ### Option: DBSchema
 #   Schema name. Used for IBM DB2 and PostgreSQL.
 #
+{% if zabbix_proxy_DBSchema %}
 DBSchema={{ zabbix_proxy_DBSchema }}
+{% endif %}
 
 ### Option: DBUser
 #   Database user. Ignored for SQLite.
@@ -121,12 +125,16 @@ DBUser={{ zabbix_proxy_DBUser }}
 #   Database password. Ignored for SQLite.
 #   Comment this line if no password is used.
 #
+{% if zabbix_proxy_DBPassword %}
 DBPassword={{ zabbix_proxy_DBPassword }}
+{% endif %}
 
 ### Option: DBSocket
 #   Path to MySQL socket.
 #
+{% if zabbix_proxy_DBSocket %}
 DBSocket={{ zabbix_proxy_DBSocket }}
+{% endif %}
 
 # Option: DBPort
 #   Database port when not using local socket. Ignored for SQLite.
@@ -413,7 +421,9 @@ Fping6Location={{ zabbix_proxy_Fping6Location }}
 ### Option: SSHKeyLocation
 #   Location of public and private keys for SSH checks and actions.
 #
+{% if zabbix_proxy_SSHKeyLocation %}
 SSHKeyLocation={{ zabbix_proxy_SSHKeyLocation }}
+{% endif %}
 
 ### Option: LogSlowQueries
 #   How long a database query may take before being logged (in milliseconds).
@@ -517,39 +527,55 @@ TLSAccept={{ zabbix_proxy_TLSAccept }}
 #   Full pathname of a file containing the top-level CA(s) certificates for
 #   peer certificate verification.
 #
+{% if zabbix_proxy_TLSCAFile %}
 TLSCAFile={{ zabbix_proxy_TLSCAFile }}
+{% endif %}
 
 ### Option: TLSCRLFile
 #   Full pathname of a file containing revoked certificates.
 #
+{% if zabbix_proxy_TLSCRLFile %}
 TLSCRLFile={{ zabbix_proxy_TLSCRLFile }}
+{% endif %}
 
 ### Option: TLSServerCertIssuer
 #Allowed server certificate issuer.
 #
+{% if zabbix_proxy_TLSServerCertIssuer %}
 TLSServerCertIssuer={{ zabbix_proxy_TLSServerCertIssuer }}
+{% endif %}
 
 ### Option: TLSServerCertSubject
 #Allowed server certificate subject.
 #
+{% if zabbix_proxy_TLSServerCertSubject %}
 TLSServerCertSubject={{ zabbix_proxy_TLSServerCertSubject }}
+{% endif %}
 
 ### Option: TLSCertFile
 #   Full pathname of a file containing the proxy certificate or certificate chain.
 #
+{% if zabbix_proxy_TLSCertFile %}
 TLSCertFile={{ zabbix_proxy_TLSCertFile }}
+{% endif %}
 
 ### Option: TLSKeyFile
 #   Full pathname of a file containing the proxy private key.
 #
+{% if zabbix_proxy_TLSKeyFile %}
 TLSKeyFile={{ zabbix_proxy_TLSKeyFile }}
+{% endif %}
 
 ### Option: TLSPSKIdentity
 #   Unique, case sensitive string used to identify the pre-shared key.
 #
+{% if zabbix_proxy_TLSPSKIdentity %}
 TLSPSKIdentity={{ zabbix_proxy_TLSPSKIdentity }}
+{% endif %}
 
 ### Option: TLSPSKFile
 #   Full pathname of a file containing the pre-shared key.
 #
+{% if zabbix_proxy_TLSPSKFile %}
 TLSPSKFile={{ zabbix_proxy_TLSPSKFile }}
+{% endif %}
