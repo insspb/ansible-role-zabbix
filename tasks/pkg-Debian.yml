@@ -7,12 +7,12 @@
 
 - name: Zabbix | Get Zabbix repo file
   get_url:
-    url: "http://repo.zabbix.com/zabbix/3.0/{{ ansible_distribution | lower }}/pool/main/z/zabbix-release/zabbix-release_3.0-1+{{ ansible_distribution_release }}_all.deb"
+    url: "http://repo.zabbix.com/zabbix/{{ zabbix_install_version }}/{{ ansible_distribution | lower }}/pool/main/z/zabbix-release/zabbix-release_{{ zabbix_install_version }}-1+{{ ansible_distribution_release }}_all.deb"
     dest: /tmp
 
 - name: Zabbix | Add the Zabbix repository
   apt:
-    deb: "/tmp/zabbix-release_3.0-1+{{ ansible_distribution_release }}_all.deb"
+    deb: "/tmp/zabbix-release_{{ zabbix_install_version }}-1+{{ ansible_distribution_release }}_all.deb"
     state: present
 
 - name: Zabbix | Update apt cache with new repo data
