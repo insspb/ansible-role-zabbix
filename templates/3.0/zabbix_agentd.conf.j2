@@ -5,86 +5,86 @@
 ############ GENERAL PARAMETERS #################
 
 ### Option: PidFile
-#	Name of PID file.
+#   Name of PID file.
 #
 PidFile={{ zabbix_agent_PidFile }}
 
 ### Option: LogType
-#	Specifies where log messages are written to:
-#		system  - syslog
-#		file    - file specified with LogFile parameter
-#		console - standard output
+#   Specifies where log messages are written to:
+#       system  - syslog
+#       file    - file specified with LogFile parameter
+#       console - standard output
 #
 LogType={{ zabbix_agent_LogType }}
 
 ### Option: LogFile
-#	Log file name for LogType 'file' parameter.
+#   Log file name for LogType 'file' parameter.
 #
 LogFile={{ zabbix_agent_LogFile }}
 
 ### Option: LogFileSize
-#	Maximum size of log file in MB.
-#	0 - disable automatic log rotation.
+#   Maximum size of log file in MB.
+#   0 - disable automatic log rotation.
 #
 LogFileSize={{ zabbix_agent_LogFileSize }}
 
 ### Option: DebugLevel
-#	Specifies debug level:
-#	0 - basic information about starting and stopping of Zabbix processes
-#	1 - critical information
-#	2 - error information
-#	3 - warnings
-#	4 - for debugging (produces lots of information)
-#	5 - extended debugging (produces even more information)
+#   Specifies debug level:
+#   0 - basic information about starting and stopping of Zabbix processes
+#   1 - critical information
+#   2 - error information
+#   3 - warnings
+#   4 - for debugging (produces lots of information)
+#   5 - extended debugging (produces even more information)
 #
 DebugLevel={{ zabbix_agent_DebugLevel }}
 
 ### Option: SourceIP
-#	Source IP address for outgoing connections.
+#   Source IP address for outgoing connections.
 #
 {% if zabbix_agent_SourceIP %}
 SourceIP={{ zabbix_agent_SourceIP }}
 {% endif %}
 
 ### Option: EnableRemoteCommands
-#	Whether remote commands from Zabbix server are allowed.
-#	0 - not allowed
-#	1 - allowed
+#   Whether remote commands from Zabbix server are allowed.
+#   0 - not allowed
+#   1 - allowed
 #
 EnableRemoteCommands={{ zabbix_agent_EnableRemoteCommands }}
 
 ### Option: LogRemoteCommands
-#	Enable logging of executed shell commands as warnings.
-#	0 - disabled
-#	1 - enabled
+#   Enable logging of executed shell commands as warnings.
+#   0 - disabled
+#   1 - enabled
 #
 LogRemoteCommands={{ zabbix_agent_LogRemoteCommands }}
 
 ##### Passive checks related
 
 ### Option: Server
-#	List of comma delimited IP addresses (or hostnames) of Zabbix servers.
-#	Incoming connections will be accepted only from the hosts listed here.
-#	If IPv6 support is enabled then '127.0.0.1', '::127.0.0.1', '::ffff:127.0.0.1' are treated equally.
+#   List of comma delimited IP addresses (or hostnames) of Zabbix servers.
+#   Incoming connections will be accepted only from the hosts listed here.
+#   If IPv6 support is enabled then '127.0.0.1', '::127.0.0.1', '::ffff:127.0.0.1' are treated equally.
 #
 Server={{ zabbix_agent_Server | join(',') }}
 
 ### Option: ListenPort
-#	Agent will listen on this port for connections from the server.
+#   Agent will listen on this port for connections from the server.
 #
 # Range: 1024-32767
 #
 ListenPort={{ zabbix_agent_ListenPort }}
 
 ### Option: ListenIP
-#	List of comma delimited IP addresses that the agent should listen on.
-#	First IP address is sent to Zabbix server if connecting to it to retrieve list of active checks.
+#   List of comma delimited IP addresses that the agent should listen on.
+#   First IP address is sent to Zabbix server if connecting to it to retrieve list of active checks.
 #
 ListenIP={{ zabbix_agent_ListenIP | join(',') }}
 
 ### Option: StartAgents
-#	Number of pre-forked instances of zabbix_agentd that process passive checks.
-#	If set to 0, disables passive checks and the agent will not listen on any TCP port.
+#   Number of pre-forked instances of zabbix_agentd that process passive checks.
+#   If set to 0, disables passive checks and the agent will not listen on any TCP port.
 #
 # Range: 0-100
 #
@@ -93,33 +93,33 @@ StartAgents={{ zabbix_agent_StartAgents }}
 ##### Active checks related
 
 ### Option: ServerActive
-#	List of comma delimited IP:port (or hostname:port) pairs of Zabbix servers for active checks.
-#	If port is not specified, default port is used.
-#	IPv6 addresses must be enclosed in square brackets if port for that host is specified.
-#	If port is not specified, square brackets for IPv6 addresses are optional.
-#	If this parameter is not specified, active checks are disabled.
-#	Example: ServerActive=127.0.0.1:20051,zabbix.domain,[::1]:30051,::1,[12fc::1]
+#   List of comma delimited IP:port (or hostname:port) pairs of Zabbix servers for active checks.
+#   If port is not specified, default port is used.
+#   IPv6 addresses must be enclosed in square brackets if port for that host is specified.
+#   If port is not specified, square brackets for IPv6 addresses are optional.
+#   If this parameter is not specified, active checks are disabled.
+#   Example: ServerActive=127.0.0.1:20051,zabbix.domain,[::1]:30051,::1,[12fc::1]
 #
 ServerActive={{ zabbix_agent_ServerActive | join(',') }}
 
 ### Option: Hostname
-#	Unique, case sensitive hostname.
-#	Required for active checks and must match hostname as configured on the server.
-#	Value is acquired from HostnameItem if undefined.
+#   Unique, case sensitive hostname.
+#   Required for active checks and must match hostname as configured on the server.
+#   Value is acquired from HostnameItem if undefined.
 #
 Hostname={{ zabbix_agent_Hostname }}
 
 ### Option: HostnameItem
-#	Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
-#	Does not support UserParameters or aliases.
+#   Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
+#   Does not support UserParameters or aliases.
 #
 HostnameItem={{ zabbix_agent_HostnameItem }}
 
 ### Option: HostMetadata
-#	Optional parameter that defines host metadata.
-#	Host metadata is used at host auto-registration process.
-#	An agent will issue an error and not start if the value is over limit of 255 characters.
-#	If not defined, value will be acquired from HostMetadataItem.
+#   Optional parameter that defines host metadata.
+#   Host metadata is used at host auto-registration process.
+#   An agent will issue an error and not start if the value is over limit of 255 characters.
+#   If not defined, value will be acquired from HostMetadataItem.
 #
 # Range: 0-255 characters
 #
@@ -128,43 +128,43 @@ HostMetadata={{ zabbix_agent_HostMetadata }}
 {% endif %}
 
 ### Option: HostMetadataItem
-#	Optional parameter that defines an item used for getting host metadata.
-#	Host metadata is used at host auto-registration process.
-#	During an auto-registration request an agent will log a warning message if
-#	the value returned by specified item is over limit of 255 characters.
-#	This option is only used when HostMetadata is not defined.
+#   Optional parameter that defines an item used for getting host metadata.
+#   Host metadata is used at host auto-registration process.
+#   During an auto-registration request an agent will log a warning message if
+#   the value returned by specified item is over limit of 255 characters.
+#   This option is only used when HostMetadata is not defined.
 #
 {% if zabbix_agent_HostMetadataItem %}
 HostMetadataItem={{ zabbix_agent_HostMetadataItem }}
 {% endif %}
 
 ### Option: RefreshActiveChecks
-#	How often list of active checks is refreshed, in seconds.
+#   How often list of active checks is refreshed, in seconds.
 #
 # Range: 60-3600
 #
 RefreshActiveChecks={{ zabbix_agent_RefreshActiveChecks }}
 
 ### Option: BufferSend
-#	Do not keep data longer than N seconds in buffer.
+#   Do not keep data longer than N seconds in buffer.
 #
 # Range: 1-3600
 #
 BufferSend={{ zabbix_agent_BufferSend }}
 
 ### Option: BufferSize
-#	Maximum number of values in a memory buffer. The agent will send
-#	all collected data to Zabbix Server or Proxy if the buffer is full.
+#   Maximum number of values in a memory buffer. The agent will send
+#   all collected data to Zabbix Server or Proxy if the buffer is full.
 #
 # Range: 2-65535
 #
 BufferSize={{ zabbix_agent_BufferSize }}
 
 ### Option: MaxLinesPerSecond
-#	Maximum number of new lines the agent will send per second to Zabbix Server
-#	or Proxy processing 'log' and 'logrt' active checks.
-#	The provided value will be overridden by the parameter 'maxlines',
-#	provided in 'log' or 'logrt' item keys.
+#   Maximum number of new lines the agent will send per second to Zabbix Server
+#   or Proxy processing 'log' and 'logrt' active checks.
+#   The provided value will be overridden by the parameter 'maxlines',
+#   provided in 'log' or 'logrt' item keys.
 #
 # Range: 1-1000
 #
@@ -173,20 +173,20 @@ MaxLinesPerSecond={{ zabbix_agent_MaxLinesPerSecond }}
 ############ ADVANCED PARAMETERS #################
 
 ### Option: Alias
-#	Sets an alias for an item key. It can be used to substitute long and complex item key with a smaller and simpler one.
-#	Multiple Alias parameters may be present. Multiple parameters with the same Alias key are not allowed.
-#	Different Alias keys may reference the same item key.
-#	For example, to retrieve the ID of user 'zabbix':
-#	Alias=zabbix.userid:vfs.file.regexp[/etc/passwd,^zabbix:.:([0-9]+),,,,\1]
-#	Now shorthand key zabbix.userid may be used to retrieve data.
-#	Aliases can be used in HostMetadataItem but not in HostnameItem parameters.
+#   Sets an alias for an item key. It can be used to substitute long and complex item key with a smaller and simpler one.
+#   Multiple Alias parameters may be present. Multiple parameters with the same Alias key are not allowed.
+#   Different Alias keys may reference the same item key.
+#   For example, to retrieve the ID of user 'zabbix':
+#   Alias=zabbix.userid:vfs.file.regexp[/etc/passwd,^zabbix:.:([0-9]+),,,,\1]
+#   Now shorthand key zabbix.userid may be used to retrieve data.
+#   Aliases can be used in HostMetadataItem but not in HostnameItem parameters.
 #
 {% for alias in zabbix_agent_Alias %}
 Alias={{ alias }}
 {% endfor %}
 
 ### Option: Timeout
-#	Spend no more than Timeout seconds on processing
+#   Spend no more than Timeout seconds on processing
 #
 
 # Range: 1-30
@@ -194,27 +194,27 @@ Alias={{ alias }}
 Timeout={{ zabbix_agent_Timeout }}
 
 ### Option: AllowRoot
-#	Allow the agent to run as 'root'. If disabled and the agent is started by 'root', the agent
-#	will try to switch to the user specified by the User configuration option instead.
-#	Has no effect if started under a regular user.
-#	0 - do not allow
-#	1 - allow
+#   Allow the agent to run as 'root'. If disabled and the agent is started by 'root', the agent
+#   will try to switch to the user specified by the User configuration option instead.
+#   Has no effect if started under a regular user.
+#   0 - do not allow
+#   1 - allow
 #
 
 #
 AllowRoot={{ zabbix_agent_AllowRoot }}
 
 ### Option: User
-#	Drop privileges to a specific, existing user on the system.
-#	Only has effect if run as 'root' and AllowRoot is disabled.
+#   Drop privileges to a specific, existing user on the system.
+#   Only has effect if run as 'root' and AllowRoot is disabled.
 #
 
 #
 User={{ zabbix_agent_User }}
 
 ### Option: Include
-#	You may include individual files or all files in a directory in the configuration file.
-#	Installing Zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
+#   You may include individual files or all files in a directory in the configuration file.
+#   Installing Zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
 #
 {% for include in zabbix_agent_Include %}
 Include={{ include }}
@@ -223,21 +223,21 @@ Include={{ include }}
 ####### USER-DEFINED MONITORED PARAMETERS #######
 
 ### Option: UnsafeUserParameters
-#	Allow all characters to be passed in arguments to user-defined parameters.
-#	The following characters are not allowed:
-#	\ ' " ` * ? [ ] { } ~ $ ! & ; ( ) < > | # @
-#	Additionally, newline characters are not allowed.
-#	0 - do not allow
-#	1 - allow
+#   Allow all characters to be passed in arguments to user-defined parameters.
+#   The following characters are not allowed:
+#   \ ' " ` * ? [ ] { } ~ $ ! & ; ( ) < > | # @
+#   Additionally, newline characters are not allowed.
+#   0 - do not allow
+#   1 - allow
 #
 # Range: 0-1
 #
 UnsafeUserParameters={{ zabbix_agent_UnsafeUserParameters }}
 
 ### Option: UserParameter
-#	User-defined parameter to monitor. There can be several user-defined parameters.
-#	Format: UserParameter=<key>,<shell command>
-#	See 'zabbix_agentd' directory for examples.
+#   User-defined parameter to monitor. There can be several user-defined parameters.
+#   Format: UserParameter=<key>,<shell command>
+#   See 'zabbix_agentd' directory for examples.
 #
 {% for parameter in zabbix_agent_UserParameter %}
 UserParameter={{ parameter }}
@@ -246,16 +246,16 @@ UserParameter={{ parameter }}
 ####### LOADABLE MODULES #######
 
 ### Option: LoadModulePath
-#	Full path to location of agent modules.
-#	Default depends on compilation options.
+#   Full path to location of agent modules.
+#   Default depends on compilation options.
 #
 LoadModulePath={{ zabbix_agent_LoadModulePath }}
 
 ### Option: LoadModule
-#	Module to load at agent startup. Modules are used to extend functionality of the agent.
-#	Format: LoadModule=<module.so>
-#	The modules must be located in directory specified by LoadModulePath.
-#	It is allowed to include multiple LoadModule parameters.
+#   Module to load at agent startup. Modules are used to extend functionality of the agent.
+#   Format: LoadModule=<module.so>
+#   The modules must be located in directory specified by LoadModulePath.
+#   It is allowed to include multiple LoadModule parameters.
 #
 {% for module in zabbix_agent_LoadModule %}
 LoadModule={{ module }}
@@ -264,37 +264,37 @@ LoadModule={{ module }}
 ####### TLS-RELATED PARAMETERS #######
 
 ### Option: TLSConnect
-#	How the agent should connect to server or proxy. Used for active checks.
-#	Only one value can be specified:
-#		unencrypted - connect without encryption
-#		psk         - connect using TLS and a pre-shared key
-#		cert        - connect using TLS and a certificate
+#   How the agent should connect to server or proxy. Used for active checks.
+#   Only one value can be specified:
+#       unencrypted - connect without encryption
+#       psk         - connect using TLS and a pre-shared key
+#       cert        - connect using TLS and a certificate
 #
 # Mandatory: yes, if TLS certificate or PSK parameters are defined (even for 'unencrypted' connection)
 #
 TLSConnect={{ zabbix_agent_TLSConnect }}
 
 ### Option: TLSAccept
-#	What incoming connections to accept.
-#	Multiple values can be specified, separated by comma:
-#		unencrypted - accept connections without encryption
-#		psk         - accept connections secured with TLS and a pre-shared key
-#		cert        - accept connections secured with TLS and a certificate
+#   What incoming connections to accept.
+#   Multiple values can be specified, separated by comma:
+#       unencrypted - accept connections without encryption
+#       psk         - accept connections secured with TLS and a pre-shared key
+#       cert        - accept connections secured with TLS and a certificate
 #
 # Mandatory: yes, if TLS certificate or PSK parameters are defined (even for 'unencrypted' connection)
 #
 TLSAccept={{ zabbix_agent_TLSAccept }}
 
 ### Option: TLSCAFile
-#	Full pathname of a file containing the top-level CA(s) certificates for
-#	peer certificate verification.
+#   Full pathname of a file containing the top-level CA(s) certificates for
+#   peer certificate verification.
 #
 {% if zabbix_agent_TLSCAFile %}
 TLSCAFile={{ zabbix_agent_TLSCAFile }}
 {% endif %}
 
 ### Option: TLSCRLFile
-#	Full pathname of a file containing revoked certificates.
+#   Full pathname of a file containing revoked certificates.
 #
 {% if zabbix_agent_TLSCRLFile %}
 TLSCRLFile={{ zabbix_agent_TLSCRLFile }}
@@ -315,28 +315,28 @@ TLSServerCertSubject={{ zabbix_agent_TLSServerCertSubject }}
 {% endif %}
 
 ### Option: TLSCertFile
-#	Full pathname of a file containing the agent certificate or certificate chain.
+#   Full pathname of a file containing the agent certificate or certificate chain.
 #
 {% if zabbix_agent_TLSCertFile %}
 TLSCertFile={{ zabbix_agent_TLSCertFile }}
 {% endif %}
 
 ### Option: TLSKeyFile
-#	Full pathname of a file containing the agent private key.
+#   Full pathname of a file containing the agent private key.
 #
 {% if zabbix_agent_TLSKeyFile %}
 TLSKeyFile={{ zabbix_agent_TLSKeyFile }}
 {% endif %}
 
 ### Option: TLSPSKIdentity
-#	Unique, case sensitive string used to identify the pre-shared key.
+#   Unique, case sensitive string used to identify the pre-shared key.
 #
 {% if zabbix_agent_TLSPSKIdentity %}
 TLSPSKIdentity={{ zabbix_agent_TLSPSKIdentity }}
 {% endif %}
 
 ### Option: TLSPSKFile
-#	Full pathname of a file containing the pre-shared key.
+#   Full pathname of a file containing the pre-shared key.
 #
 {% if zabbix_agent_TLSPSKFile %}
 TLSPSKFile={{ zabbix_agent_TLSPSKFile }}
