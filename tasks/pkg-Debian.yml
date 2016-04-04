@@ -1,0 +1,49 @@
+- name: Zabbix | Make sure the ansible required dependencies are installed
+  become: yes
+  become_method: su
+  apt:
+    pkg: python-pycurl
+    state: present
+
+- name: Zabbix | Get Zabbix repo file
+  get_url:
+    url: "http://repo.zabbix.com/zabbix/3.0/{{ ansible_distribution | lower }}/pool/main/z/zabbix-release/zabbix-release_3.0-1+{{ ansible_distribution_release }}_all.deb"
+    dest: /tmp
+
+- name: Zabbix | Add the Zabbix repository
+  apt:
+    deb: "/tmp/zabbix-release_3.0-1+{{ ansible_distribution_release }}_all.deb"
+    state: present
+
+- name: Zabbix | Update apt cache with new repo data
+  become: yes
+  apt: 
+    update_cache: yes
+
+- name: Zabbix | Make sure Zabbix agent is installed
+  become: yes
+  apt:
+    pkg: zabbix-agent
+    state: latest
+  when: "{{ zabbix_install_agent }} == True" 
+
+- name: Zabbix | Make sure Zabbix server is installed
+  become: yes
+  apt:
+    pkg: "zabbix-server-{{ zabbix_server_db_type | lower }}"
+    state: latest
+  when: "{{ zabbix_install_server }} == True"
+
+- name: Zabbix | Make sure Zabbix server frontend is installed
+  become: yes
+  apt:
+    pkg: zabbix-frontend-php
+    state: latest
+  when: "{{ zabbix_install_frontend }} == True"
+
+- name: Zabbix | Make sure Zabbix proxy is installed
+  become: yes
+  apt:
+    pkg: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
+    state: latest
+  when: "{{ zabbix_install_proxy }} == True"

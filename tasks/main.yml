@@ -1,2 +1,5 @@
----
-# tasks file for insspb.zabbix
+- include: pkg-CentOs.yml
+  when: ansible_os_family == "RedHat"
+
+- include: pkg-Debian.yml
+  when: ansible_os_family == "Debian"
