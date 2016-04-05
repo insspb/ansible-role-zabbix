@@ -10,6 +10,7 @@
     dest: /tmp
 
 - name: Zabbix | Add the Zabbix repository
+  become: yes
   apt:
     deb: "/tmp/zabbix-release_{{ zabbix_install_version }}-1+{{ ansible_distribution_release }}_all.deb"
     state: present
