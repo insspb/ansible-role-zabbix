@@ -1,6 +1,5 @@
 - name: Zabbix | Make sure the ansible required dependencies are installed
   become: yes
-  become_method: su
   apt:
     pkg: python-pycurl
     state: present
