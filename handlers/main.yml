@@ -1,2 +1,16 @@
 ---
-# handlers file for insspb.zabbix
+- name: Zabbix | Zabbix | Restart agent service
+  service:
+    state: restarted
+    name: "{{ zabbix_agent_service_name }}"
+
+- name: Zabbix | Zabbix | Restart proxy service
+  service:
+    state: restarted
+    name: "{{ zabbix_proxy_service_name }}"
+
+- name: Zabbix | Zabbix | Restart server service
+  service:
+    state: restarted
+    name: "{{ zabbix_server_service_name }}"
+

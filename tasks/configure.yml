@@ -1,0 +1,30 @@
+---
+- name: Zabbix | Configure | Zabbix agent
+  become: yes
+  template: 
+    src: "{{ zabbix_install_version }}/zabbix_agentd.conf.j2"
+    dest: "/etc/zabbix/zabbix_agentd.conf"
+    mode: 0644
+    backup: yes
+  when: "{{ zabbix_install_agent }} == True"
+  notify: Zabbix | Zabbix | Restart agent service
+
+- name: Zabbix | Configure | Zabbix server
+  become: yes
+  template: 
+    src: "{{ zabbix_install_version }}/zabbix_server.conf.j2"
+    dest: "/etc/zabbix/zabbix_server.conf"
+    mode: 0644
+    backup: yes
+  when: "{{ zabbix_install_server }} == True"
+  notify: Zabbix | Zabbix | Restart server service
+
+- name: Zabbix | Configure | Zabbix proxy
+  become: yes
+  template: 
+    src: "{{ zabbix_install_version }}/zabbix_proxy.conf.j2"
+    dest: "/etc/zabbix/zabbix_proxy.conf"
+    mode: 0644
+    backup: yes
+  when: "{{ zabbix_install_proxy }} == True"
+  notify: Zabbix | Zabbix | Restart proxy service

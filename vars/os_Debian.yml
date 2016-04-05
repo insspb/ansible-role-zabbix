@@ -1,0 +1,4 @@
+---
+zabbix_agent_service_name: zabbix-agent
+zabbix_proxy_service_name: zabbix-proxy
+zabbix_server_service_name: zabbix-server

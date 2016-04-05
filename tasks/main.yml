@@ -3,9 +3,12 @@
     - "zabbix_agent.yml"
     - "zabbix_proxy.yml"
     - "zabbix_server.yml"
+    - "os_{{ ansible_os_family }}.yml"
     
 - include: pkg-CentOs.yml
   when: ansible_os_family == "RedHat"
 
 - include: pkg-Debian.yml
   when: ansible_os_family == "Debian"
+
+- include: configure.yml
