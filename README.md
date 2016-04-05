@@ -4,7 +4,9 @@
 - Developer branch: [![Build Status](https://travis-ci.org/insspb/ansible-role-zabbix.svg?branch=develop)](https://travis-ci.org/insspb/ansible-role-zabbix)
 
 ## Description
-This role will install and configure zabbix monitoring agent, server and proxy on desired host.
+This role will install and configure zabbix monitoring agent, server and proxy on target host.
+We use full templates for all zabbix config options, so you can configure you host in host_vars.
+We do not install any database engine on server ourself (just package system install dependencies) so it is better to use another role to database configuration BEFORE zabbix install.
 
 ## Requirements
 No requiments yet.
