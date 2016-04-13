@@ -113,14 +113,14 @@ zabbix_server_DBUser: "zabbix"
 #
 # Mandatory: no
 # Default:
-zabbix_server_DBPassword: ""
+# zabbix_server_DBPassword: ""
 
 ### Option: DBSocket
 #	Path to MySQL socket.
 #
 # Mandatory: no
 # Default:
-zabbix_server_DBSocket: "/tmp/mysql.sock"
+zabbix_server_DBSocket: "/var/run/mysqld/mysqld.sock"
 
 ### Option: DBPort
 #	Database port when not using local socket. Ignored for SQLite.
