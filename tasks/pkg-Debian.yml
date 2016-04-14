@@ -34,6 +34,13 @@
     state: latest
   when: "{{ zabbix_install_server }} == True"
 
+- name: Zabbix | Make sure additional packages installed for Zabbix server
+  become: yes
+  apt:
+    pkg: snmp-mibs-downloader
+    state: latest
+  when: "{{ zabbix_install_server }} == True"
+
 - name: Zabbix | Make sure Zabbix server frontend is installed
   become: yes
   apt:
