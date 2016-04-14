@@ -1,8 +1,5 @@
 - include_vars: "{{ item }}"
   with_items:
-    - "zabbix_agent.yml"
-    - "zabbix_proxy.yml"
-    - "zabbix_server.yml"
     - "os_{{ ansible_os_family }}.yml"
     
 - include: pkg-CentOs.yml
