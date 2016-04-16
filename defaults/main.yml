@@ -153,7 +153,7 @@ zabbix_agent_ServerActive:
 #
 # Mandatory: no
 #
-zabbix_agent_Hostname: "Zabbix server"
+zabbix_agent_Hostname: "{{ inventory_hostname }}"
 
 ### Option: HostnameItem
 #   Item used for generating Hostname if it is undefined. Ignored if Hostname is defined.
@@ -396,7 +396,7 @@ zabbix_agent_TLSPSKIdentity: ""
 #
 # Mandatory: no
 #
-zabbix_agent_TLSPSKFile: ""
+zabbix_agent_TLSPSKFile: "/etc/zabbix/zabbix_agent.psk"
 
 
 ################### Zabbix proxy defaults ###################
@@ -446,7 +446,7 @@ zabbix_proxy_ServerPort: 10051
 # Default:
 # Hostname=
 
-zabbix_proxy_Hostname: "Zabbix proxy"
+zabbix_proxy_Hostname: "{{ inventory_hostname }}"
 
 ### Option: HostnameItem
 #   Item used for generating Hostname if it is undefined.
@@ -1082,7 +1082,7 @@ zabbix_proxy_TLSPSKIdentity: ""
 #
 # Mandatory: no
 # Default:
-zabbix_proxy_TLSPSKFile: ""
+zabbix_proxy_TLSPSKFile: "/etc/zabbix/zabbix_proxy.psk"
 
 ################### Zabbix server defaults ###################
 
