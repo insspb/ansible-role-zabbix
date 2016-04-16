@@ -17,8 +17,8 @@
     mode: 0644
     backup: yes
   when: zabbix_install_agent
-        and (zabbix_agent_TLSPSKFile is defined)
-        and (zabbix_agent_TLSPSKIdentity is defined)
+        and zabbix_agent_TLSPSK != ""
+        and zabbix_agent_TLSPSKIdentity != ""
   notify: Zabbix | Zabbix | Restart agent service
 
 - name: Zabbix | Configure | Zabbix server
@@ -49,6 +49,6 @@
     mode: 0644
     backup: yes
   when: zabbix_install_proxy
-        and (zabbix_proxy_TLSPSKFile is defined)
-        and (zabbix_proxy_TLSPSKIdentity is defined)
+        and zabbix_proxy_TLSPSK != ""
+        and zabbix_proxy_TLSPSKIdentity != ""
   notify: Zabbix | Zabbix | Restart proxy service
