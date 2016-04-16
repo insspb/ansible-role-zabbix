@@ -1,5 +1,5 @@
 ---
-- name: Zabbix | Configure | Zabbix agent
+- name: Zabbix | Configure | Zabbix agent general configuration
   become: yes
   template: 
     src: "{{ zabbix_install_version }}/zabbix_agentd.conf.j2"
@@ -7,6 +7,18 @@
     mode: 0644
     backup: yes
   when: "{{ zabbix_install_agent }} == True"
+  notify: Zabbix | Zabbix | Restart agent service
+
+- name: Zabbix | Configure | Zabbix agent PSK encryprion configuration
+  become: yes
+  template: 
+    src: "zabbix_agent.psk.j2"
+    dest: "{{ zabbix_agent_TLSPSKFile }}"
+    mode: 0644
+    backup: yes
+  when: zabbix_install_agent
+        and (zabbix_agent_TLSPSKFile is defined)
+        and (zabbix_agent_TLSPSKIdentity is defined)
   notify: Zabbix | Zabbix | Restart agent service
 
 - name: Zabbix | Configure | Zabbix server
@@ -19,7 +31,7 @@
   when: "{{ zabbix_install_server }} == True"
   notify: Zabbix | Zabbix | Restart server service
 
-- name: Zabbix | Configure | Zabbix proxy
+- name: Zabbix | Configure | Zabbix proxy general configuration
   become: yes
   template: 
     src: "{{ zabbix_install_version }}/zabbix_proxy.conf.j2"
@@ -27,4 +39,16 @@
     mode: 0644
     backup: yes
   when: "{{ zabbix_install_proxy }} == True"
+  notify: Zabbix | Zabbix | Restart proxy service
+
+- name: Zabbix | Configure | Zabbix proxy PSK encryption configuration
+  become: yes
+  template: 
+    src: "zabbix_proxy.psk.j2"
+    dest: "{{ zabbix_proxy_TLSPSKFile }}"
+    mode: 0644
+    backup: yes
+  when: zabbix_install_proxy
+        and (zabbix_proxy_TLSPSKFile is defined)
+        and (zabbix_proxy_TLSPSKIdentity is defined)
   notify: Zabbix | Zabbix | Restart proxy service
