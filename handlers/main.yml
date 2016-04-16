@@ -1,15 +1,18 @@
 ---
 - name: Zabbix | Zabbix | Restart agent service
+  become: yes
   service:
     state: restarted
     name: "{{ zabbix_agent_service_name }}"
 
 - name: Zabbix | Zabbix | Restart proxy service
+  become: yes
   service:
     state: restarted
     name: "{{ zabbix_proxy_service_name }}"
 
 - name: Zabbix | Zabbix | Restart server service
+  become: yes
   service:
     state: restarted
     name: "{{ zabbix_server_service_name }}"
