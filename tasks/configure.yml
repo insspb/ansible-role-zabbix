@@ -9,6 +9,16 @@
   when: "{{ zabbix_install_agent }} == True"
   notify: Zabbix | Zabbix | Restart agent service
 
+- name: Zabbix | Configure | Zabbix agent checking agentd subconfiguration folder exist
+  become: yes
+  file:
+    state: directory
+    path: "/etc/zabbix/zabbix_agentd.d"
+    owner: "root"
+    group: "root"
+    mode: 0755
+  when: "{{ zabbix_install_agent }} == True"
+
 - name: Zabbix | Configure | Zabbix agent PSK encryprion configuration
   become: yes
   template: 
