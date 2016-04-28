@@ -6,8 +6,8 @@ zabbix_install_agent: yes
 zabbix_install_version: "3.0"
 zabbix_server_db_type: "mysql"
 zabbix_proxy_db_type: "mysql"
-zabbix_agent_TLSPSK: ""
-zabbix_proxy_TLSPSK: ""
+#zabbix_agent_TLSPSK: ""
+#zabbix_proxy_TLSPSK: ""
 
 
 ################### Zabbix agent defaults ###################
@@ -389,7 +389,7 @@ zabbix_agent_TLSKeyFile: ""
 #
 # Mandatory: no
 #
-zabbix_agent_TLSPSKIdentity: ""
+#zabbix_agent_TLSPSKIdentity: ""
 
 ### Option: TLSPSKFile
 #   Full pathname of a file containing the pre-shared key.

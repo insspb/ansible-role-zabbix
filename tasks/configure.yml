@@ -17,8 +17,8 @@
     mode: 0644
     backup: yes
   when: zabbix_install_agent
-        and zabbix_agent_TLSPSK != ""
-        and zabbix_agent_TLSPSKIdentity != ""
+        and (zabbix_agent_TLSPSK is defined)
+        and (zabbix_agent_TLSPSKIdentity and defined)
   notify: Zabbix | Zabbix | Restart agent service
 
 - name: Zabbix | Configure | Zabbix server

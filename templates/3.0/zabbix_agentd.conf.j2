@@ -331,13 +331,13 @@ TLSKeyFile={{ zabbix_agent_TLSKeyFile }}
 ### Option: TLSPSKIdentity
 #   Unique, case sensitive string used to identify the pre-shared key.
 #
-{% if zabbix_agent_TLSPSKIdentity %}
+{% if zabbix_agent_TLSPSKIdentity is defined %}
 TLSPSKIdentity={{ zabbix_agent_TLSPSKIdentity }}
 {% endif %}
 
 ### Option: TLSPSKFile
 #   Full pathname of a file containing the pre-shared key.
 #
-{% if zabbix_agent_TLSPSKFile %}
+{% if (zabbix_agent_TLSPSKFile is defined) and (zabbix_agent_TLSPSKIdentity is defined) %}
 TLSPSKFile={{ zabbix_agent_TLSPSKFile }}
 {% endif %}
