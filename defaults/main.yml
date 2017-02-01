@@ -3,7 +3,7 @@ zabbix_install_server: no
 zabbix_install_frontend: no
 zabbix_install_proxy: no
 zabbix_install_agent: yes
-zabbix_install_version: "3.0"
+zabbix_install_version: "3.2"
 zabbix_server_db_type: "mysql"
 zabbix_proxy_db_type: "mysql"
 #zabbix_agent_TLSPSK: ""
