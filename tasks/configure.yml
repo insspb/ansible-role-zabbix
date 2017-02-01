@@ -26,9 +26,10 @@
     dest: "{{ zabbix_agent_TLSPSKFile }}"
     mode: 0644
     backup: yes
-  when: zabbix_install_agent
-        and (zabbix_agent_TLSPSK is defined)
-        and (zabbix_agent_TLSPSKIdentity and defined)
+  when:
+    - zabbix_install_agent
+    - zabbix_agent_TLSPSK is defined
+    - zabbix_agent_TLSPSKIdentity is defined
   notify: Zabbix | Zabbix | Restart agent service
 
 - name: Zabbix | Configure | Zabbix server
@@ -58,7 +59,8 @@
     dest: "{{ zabbix_proxy_TLSPSKFile }}"
     mode: 0644
     backup: yes
-  when: zabbix_install_proxy
-        and zabbix_proxy_TLSPSK != ""
-        and zabbix_proxy_TLSPSKIdentity != ""
+  when:
+    - zabbix_install_proxy
+    - zabbix_proxy_TLSPSK != ""
+    - zabbix_proxy_TLSPSKIdentity != ""
   notify: Zabbix | Zabbix | Restart proxy service
