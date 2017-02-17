@@ -21,8 +21,13 @@
   become: yes
   yum:
     name: "http://repo.zabbix.com/zabbix/{{ zabbix_install_version }}/rhel/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/zabbix-release-{{ zabbix_install_version }}-1.el{{ ansible_distribution_major_version }}.noarch.rpm"
-    disable_gpg_check: yes
     state: present
+
+- name: Zabbix | Install Zabbix repository gpg key
+  become: True
+  rpm_key:
+    state: present
+    key: /etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591
 
 - name: Zabbix | Make sure Zabbix agent is installed
   become: yes
