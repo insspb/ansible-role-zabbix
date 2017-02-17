@@ -1,5 +1,12 @@
 ---
+- name: Zabbix | Install Epel repository gpg key
+  become: True
+  rpm_key:
+    state: present
+    key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
+
 - name: Zabbix | Install Epel repository
+  become: True
   yum:
     name: epel-release
     state: latest
@@ -65,4 +72,3 @@
     name: "{{ zabbix_proxy_service_name }}"
     enabled: yes
   when: "{{ zabbix_install_proxy }} == True"
-
