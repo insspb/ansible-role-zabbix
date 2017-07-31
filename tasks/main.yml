@@ -13,6 +13,3 @@
 
 - include: configure.yml
   when: ansible_os_family != "Windows"
-
-- include: configure-windows.yml
-  when: ansible_os_family == "Windows"

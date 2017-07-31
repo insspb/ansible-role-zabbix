@@ -1,6 +1,12 @@
 ---
-- name: Zabbix | Windows install zabbix agent with chocolate
-  register: fresh_install
+- name: Zabbix | Windows | Install zabbix agent with chocolate
   win_chocolatey:
     name: zabbix-agent
     state: present
+
+- name: Zabbix | Windows | Change zabbix agent config
+  win_template:
+    src: 'templates/windows/zabbix_agentd.conf.j2'
+    dest: 'C:\ProgramData\zabbix\zabbix_agentd.conf'
+  notify: Zabbix | Windows | Restart agent service
+

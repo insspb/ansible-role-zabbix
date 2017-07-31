@@ -1,1 +1,2 @@
 ---
+zabbix_agent_service_name: 'Zabbix Agent'

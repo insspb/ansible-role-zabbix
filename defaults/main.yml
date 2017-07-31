@@ -44,7 +44,7 @@ zabbix_agent_LogType: "file"
 # Mandatory: no
 #
 zabbix_agent_LogFile: "/var/log/zabbix/zabbix_agentd.log"
-zabbix_agent_LogFile_Windows: "c:\zabbix_agentd.log"
+zabbix_agent_LogFile_Windows: 'c:\zabbix_agentd.log'
 
 ### Option: LogFileSize
 #   Maximum size of log file in MB.

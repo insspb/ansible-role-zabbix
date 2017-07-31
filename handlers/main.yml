@@ -5,6 +5,11 @@
     state: restarted
     name: "{{ zabbix_agent_service_name }}"
 
+- name: Zabbix | Windows | Restart agent service
+  win_service:
+    state: restarted
+    name: "{{ zabbix_agent_service_name }}"
+
 - name: Zabbix | Zabbix | Restart proxy service
   become: yes
   service:
