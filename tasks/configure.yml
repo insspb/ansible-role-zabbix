@@ -1,12 +1,13 @@
 ---
 - name: Zabbix | Configure | Zabbix agent general configuration
   become: yes
-  template: 
+  template:
     src: "{{ zabbix_install_version }}/zabbix_agentd.conf.j2"
     dest: "/etc/zabbix/zabbix_agentd.conf"
     mode: 0644
     backup: yes
-  when: "{{ zabbix_install_agent }} == True"
+  when:
+    - zabbix_install_agent == True
   notify: Zabbix | Zabbix | Restart agent service
 
 - name: Zabbix | Configure | Zabbix agent checking agentd subconfiguration folder exist
@@ -17,50 +18,53 @@
     owner: "root"
     group: "root"
     mode: 0755
-  when: "{{ zabbix_install_agent }} == True"
+  when:
+    - zabbix_install_agent == True
 
 - name: Zabbix | Configure | Zabbix agent PSK encryprion configuration
   become: yes
-  template: 
+  template:
     src: "zabbix_agent.psk.j2"
     dest: "{{ zabbix_agent_TLSPSKFile }}"
     mode: 0644
     backup: yes
   when:
-    - zabbix_install_agent
+    - zabbix_install_agent == True
     - zabbix_agent_TLSPSK is defined
     - zabbix_agent_TLSPSKIdentity is defined
   notify: Zabbix | Zabbix | Restart agent service
 
 - name: Zabbix | Configure | Zabbix server
   become: yes
-  template: 
+  template:
     src: "{{ zabbix_install_version }}/zabbix_server.conf.j2"
     dest: "/etc/zabbix/zabbix_server.conf"
     mode: 0644
     backup: yes
-  when: "{{ zabbix_install_server }} == True"
+  when:
+    - zabbix_install_server == True
   notify: Zabbix | Zabbix | Restart server service
 
 - name: Zabbix | Configure | Zabbix proxy general configuration
   become: yes
-  template: 
+  template:
     src: "{{ zabbix_install_version }}/zabbix_proxy.conf.j2"
     dest: "/etc/zabbix/zabbix_proxy.conf"
     mode: 0644
     backup: yes
-  when: "{{ zabbix_install_proxy }} == True"
+  when:
+    - zabbix_install_proxy == True
   notify: Zabbix | Zabbix | Restart proxy service
 
 - name: Zabbix | Configure | Zabbix proxy PSK encryption configuration
   become: yes
-  template: 
+  template:
     src: "zabbix_proxy.psk.j2"
     dest: "{{ zabbix_proxy_TLSPSKFile }}"
     mode: 0644
     backup: yes
   when:
-    - zabbix_install_proxy
+    - zabbix_install_proxy == True
     - zabbix_proxy_TLSPSK != ""
     - zabbix_proxy_TLSPSKIdentity != ""
   notify: Zabbix | Zabbix | Restart proxy service

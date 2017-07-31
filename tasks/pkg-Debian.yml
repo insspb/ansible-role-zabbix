@@ -1,51 +1,57 @@
-- name: Zabbix | Make sure the ansible required dependencies are installed
+- name: Zabbix | Debian | Make sure the ansible required dependencies are installed
   become: yes
   apt:
     pkg: python-pycurl
     state: present
 
-- name: Zabbix | Add the Zabbix repository
+- name: Zabbix | Debian | Add the Zabbix repository
   become: yes
   apt:
     deb: "http://repo.zabbix.com/zabbix/{{ zabbix_install_version }}/{{ ansible_distribution | lower }}/pool/main/z/zabbix-release/zabbix-release_{{ zabbix_install_version }}-1+{{ ansible_distribution_release }}_all.deb"
     state: present
 
-- name: Zabbix | Update apt cache with new repo data
+- name: Zabbix | Debian | Update apt cache with new repo data
   become: yes
-  apt: 
+  apt:
     update_cache: yes
+    cache_valid_time: 3600
 
-- name: Zabbix | Make sure Zabbix agent is installed
+- name: Zabbix | Debian | Make sure Zabbix agent is installed
   become: yes
   apt:
     pkg: zabbix-agent
     state: latest
-  when: "{{ zabbix_install_agent }} == True" 
+  when:
+    - zabbix_install_agent == True
 
-- name: Zabbix | Make sure Zabbix server is installed
+- name: Zabbix | Debian | Make sure Zabbix server is installed
   become: yes
   apt:
     pkg: "zabbix-server-{{ zabbix_server_db_type | lower }}"
     state: latest
-  when: "{{ zabbix_install_server }} == True"
+  when:
+    - zabbix_install_server == True
 
-- name: Zabbix | Make sure additional packages installed for Zabbix server
+- name: Zabbix | Debian | Make sure additional packages installed for Zabbix server
   become: yes
   apt:
     pkg: snmp-mibs-downloader
     state: latest
-  when: "{{ zabbix_install_server }} == True"
+  when:
+    - zabbix_install_server == True
 
-- name: Zabbix | Make sure Zabbix server frontend is installed
+- name: Zabbix | Debian | Make sure Zabbix server frontend is installed
   become: yes
   apt:
     pkg: zabbix-frontend-php
     state: latest
-  when: "{{ zabbix_install_frontend }} == True"
+  when:
+    - zabbix_install_frontend == True
 
-- name: Zabbix | Make sure Zabbix proxy is installed
+- name: Zabbix | Debian | Make sure Zabbix proxy is installed
   become: yes
   apt:
     pkg: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
     state: latest
-  when: "{{ zabbix_install_proxy }} == True"
+  when:
+    - zabbix_install_proxy == True

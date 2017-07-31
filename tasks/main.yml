@@ -3,13 +3,17 @@
     - "os_{{ ansible_os_family }}.yml"
 
 - include: pkg-CentOs.yml
-  when: ansible_os_family == "RedHat"
+  when:
+    - ansible_os_family == "RedHat"
 
 - include: pkg-windows.yml
-  when: ansible_os_family == "Windows"
+  when:
+    - ansible_os_family == "Windows"
 
 - include: pkg-Debian.yml
-  when: ansible_os_family == "Debian"
+  when:
+    - ansible_os_family == "Debian"
 
 - include: configure.yml
-  when: ansible_os_family != "Windows"
+  when:
+    - ansible_os_family != "Windows"
