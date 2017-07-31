@@ -44,6 +44,7 @@ zabbix_agent_LogType: "file"
 # Mandatory: no
 #
 zabbix_agent_LogFile: "/var/log/zabbix/zabbix_agentd.log"
+zabbix_agent_LogFile_Windows: "c:\zabbix_agentd.log"
 
 ### Option: LogFileSize
 #   Maximum size of log file in MB.
@@ -264,6 +265,20 @@ zabbix_agent_AllowRoot: 0
 #
 zabbix_agent_User: "zabbix"
 
+### Option: PerfCounter
+#	Syntax: <parameter_name>,"<perf_counter_path>",<period>
+#	Defines new parameter <parameter_name> which is an average value for system performance counter <perf_counter_path> for the specified time period <period> (in seconds).
+#	For example, if you wish to receive average number of processor interrupts per second for last minute, you can define new parameter "interrupts" as following:
+#	PerfCounter = interrupts,"\Processor(0)\Interrupts/sec",60
+#	Please note double quotes around performance counter path.
+#	Samples for calculating average value will be taken every second.
+#	You may run "typeperf -qx" to get list of all performance counters available in Windows.
+#
+# Mandatory: no
+# Range:
+# Default:
+zabbix_agent_PerfCounter: []
+
 ### Option: Include
 #   You may include individual files or all files in a directory in the configuration file.
 #   Installing Zabbix will create include directory in /usr/local/etc, unless modified during the compile time.
@@ -272,6 +287,8 @@ zabbix_agent_User: "zabbix"
 #
 zabbix_agent_Include: 
     - "/etc/zabbix/zabbix_agentd.d/"
+
+zabbix_agent_Include_Windows: []
 
 ####### USER-DEFINED MONITORED PARAMETERS #######
 
@@ -296,6 +313,7 @@ zabbix_agent_UnsafeUserParameters: 0
 # Mandatory: no
 #
 zabbix_agent_UserParameter: []
+zabbix_agent_UserParameter_windows: []
 
 ####### LOADABLE MODULES #######
 
