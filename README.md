@@ -13,6 +13,23 @@ No requiments yet.
 
 ## Role Variables
 
+## Supported OS matrix:
+
+| OS | Zabbix Agent | Zabbix proxy | Zabbix server |
+|:--|:-:|:-:|:-:|
+| Ubuntu 14.04 x32 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| Ubuntu 14.04 x64 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| Ubuntu 16.04 x32 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| Ubuntu 16.04 x64 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| Debian 8 x32 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| Debian 8 x64 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| CentOS 6 x32 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| CentOS 6 x64 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| CentOS 7 | X (2.0.0) | X (2.0.0) | X (2.0.0) |
+| Windows 8.1+ | X (No TLS) | | |
+
+Last manually tested version in brackets.
+
 ## Dependencies
 Independent role.
 
