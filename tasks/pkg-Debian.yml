@@ -6,11 +6,20 @@
 
 - name: Zabbix | Debian | Add the Zabbix repository
   become: yes
+  register: fresh_repo
   apt:
     deb: "http://repo.zabbix.com/zabbix/{{ zabbix_install_version }}/{{ ansible_distribution | lower }}/pool/main/z/zabbix-release/zabbix-release_{{ zabbix_install_version }}-1+{{ ansible_distribution_release }}_all.deb"
     state: present
+    update_cache: yes
 
 - name: Zabbix | Debian | Update apt cache with new repo data
+  become: yes
+  apt:
+    update_cache: yes
+  when:
+    - fresh_repo.changed == True
+
+- name: Zabbix | Debian | Update apt cache with new zabbix agent versions
   become: yes
   apt:
     update_cache: yes
