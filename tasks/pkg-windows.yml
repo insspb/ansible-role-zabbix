@@ -1,0 +1,6 @@
+---
+- name: Zabbix | Windows install zabbix agent with chocolate
+  register: fresh_install
+  win_chocolatey:
+    name: zabbix-agent
+    state: present
