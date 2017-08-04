@@ -555,27 +555,27 @@ TLSServerCertSubject={{ zabbix_proxy_TLSServerCertSubject }}
 ### Option: TLSCertFile
 #   Full pathname of a file containing the proxy certificate or certificate chain.
 #
-{% if zabbix_proxy_TLSCertFile %}
+{% if zabbix_proxy_TLSCertFile and zabbix_proxy_TLSCertFile is defined %}
 TLSCertFile={{ zabbix_proxy_TLSCertFile }}
 {% endif %}
 
 ### Option: TLSKeyFile
 #   Full pathname of a file containing the proxy private key.
 #
-{% if zabbix_proxy_TLSKeyFile %}
+{% if zabbix_proxy_TLSKeyFile and zabbix_proxy_TLSKeyFile is defined %}
 TLSKeyFile={{ zabbix_proxy_TLSKeyFile }}
 {% endif %}
 
 ### Option: TLSPSKIdentity
 #   Unique, case sensitive string used to identify the pre-shared key.
 #
-{% if zabbix_proxy_TLSPSKIdentity %}
+{% if zabbix_proxy_TLSPSKIdentity is defined and zabbix_proxy_TLSPSKIdentity %}
 TLSPSKIdentity={{ zabbix_proxy_TLSPSKIdentity }}
 {% endif %}
 
 ### Option: TLSPSKFile
 #   Full pathname of a file containing the pre-shared key.
 #
-{% if zabbix_proxy_TLSPSKFile %}
+{% if zabbix_proxy_TLSPSKIdentity and zabbix_proxy_TLSPSKFile and zabbix_proxy_TLSPSKFile is defined %}
 TLSPSKFile={{ zabbix_proxy_TLSPSKFile }}
 {% endif %}
