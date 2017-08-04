@@ -1,0 +1,1 @@
+# Supported zabbix agent variables

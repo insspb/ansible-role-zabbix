@@ -1,0 +1,1 @@
+# Supported zabbix proxy variables

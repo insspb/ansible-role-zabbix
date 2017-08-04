@@ -12,9 +12,15 @@
 
 ## Requirements
 
-No requiments yet.
+- All databases, except sqlite should be set before this role (database, user and privileges)
 
 ## Role Variables
+
+- [List](docs/required-minimum.md) of minimum required variables to configure
+- Supported zabbix [agent](docs/zabbix-agent-vars.md) variables
+- Supported zabbix [proxy](docs/zabbix-proxy-vars.md) variables
+- Supported zabbix [server](docs/zabbix-server-vars.md) variables
+- Supported zabbix [frontend](docs/zabbix-frontend-vars.md) variables
 
 ## Supported OS matrix
 

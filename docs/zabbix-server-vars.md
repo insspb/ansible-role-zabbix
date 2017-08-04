@@ -1,0 +1,1 @@
+# Supported zabbix server variables
