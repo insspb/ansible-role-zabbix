@@ -1,0 +1,9 @@
+---
+- name: Zabbix | Configure | Server | Zabbix server general configuration
+  become: yes
+  template:
+    src: "{{ zabbix_install_version }}/zabbix_server.conf.j2"
+    dest: "/etc/zabbix/zabbix_server.conf"
+    mode: 0644
+    backup: yes
+  notify: Zabbix | Zabbix | Restart server service

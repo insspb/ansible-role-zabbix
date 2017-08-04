@@ -1,0 +1,13 @@
+---
+- name: Zabbix | RedHat | Make sure Zabbix server is installed
+  become: yes
+  yum:
+    name: "zabbix-server-{{ zabbix_server_db_type | lower }}"
+    state: latest
+    enablerepo: zabbix-deprecated
+
+- name: Zabbix | RedHat | Make sure Zabbix server is enabled
+  become: yes
+  service:
+    name: "{{ zabbix_server_service_name }}"
+    enabled: yes

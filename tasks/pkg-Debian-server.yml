@@ -1,0 +1,18 @@
+---
+- name: Zabbix | Debian | Update apt cache with new zabbix server versions
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Zabbix | Debian | Make sure Zabbix server is installed
+  become: yes
+  apt:
+    pkg: "zabbix-server-{{ zabbix_server_db_type | lower }}"
+    state: latest
+
+- name: Zabbix | Debian | Make sure additional packages installed for Zabbix server
+  become: yes
+  apt:
+    pkg: snmp-mibs-downloader
+    state: latest

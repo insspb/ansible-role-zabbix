@@ -1,0 +1,5 @@
+---
+- name: Zabbix | Windows | Install zabbix agent with chocolate
+  win_chocolatey:
+    name: zabbix-agent
+    state: present

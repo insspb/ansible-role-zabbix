@@ -1,0 +1,13 @@
+---
+- name: Zabbix | RedHat | Make sure Zabbix proxy is installed
+  become: yes
+  yum:
+    name: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
+    state: latest
+    enablerepo: zabbix-deprecated
+
+- name: Zabbix | RedHat | Make sure Zabbix proxy is enabled
+  become: yes
+  service:
+    name: "{{ zabbix_proxy_service_name }}"
+    enabled: yes

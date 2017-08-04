@@ -1,29 +1,29 @@
 ---
-- name: Zabbix | RedHat | Install Epel repository gpg key
+- name: Zabbix | RedHat | General | Install Epel repository gpg key
   become: True
   rpm_key:
     state: present
     key: https://dl.fedoraproject.org/pub/epel/RPM-GPG-KEY-EPEL-{{ ansible_distribution_major_version }}
 
-- name: Zabbix | RedHat | Install Epel repository
+- name: Zabbix | RedHat | General | Install Epel repository
   become: True
   yum:
     name: epel-release
     state: latest
 
-- name: Zabbix | RedHat | Make sure the ansible required dependencies are installed
+- name: Zabbix | RedHat | General | Make sure the ansible required dependencies are installed
   become: yes
   yum:
     name: python-pycurl
     state: present
 
-- name: Zabbix | RedHat | Add the Zabbix repository
+- name: Zabbix | RedHat | General | Add the Zabbix repository
   become: yes
   yum:
     name: "http://repo.zabbix.com/zabbix/{{ zabbix_install_version }}/rhel/{{ ansible_distribution_major_version }}/{{ ansible_architecture }}/zabbix-release-{{ zabbix_install_version }}-1.el{{ ansible_distribution_major_version }}.noarch.rpm"
     state: present
 
-- name: Zabbix | RedHat | Install Zabbix repository gpg keys
+- name: Zabbix | RedHat | General | Install Zabbix repository gpg keys
   become: True
   rpm_key:
     state: present
@@ -31,63 +31,3 @@
   with_items:
     - '/etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX-A14FE591'
     - '/etc/pki/rpm-gpg/RPM-GPG-KEY-ZABBIX'
-
-- name: Zabbix | RedHat | Make sure Zabbix agent is installed
-  become: yes
-  yum:
-    name: zabbix-agent
-    state: latest
-    enablerepo: zabbix-deprecated
-  when:
-    - zabbix_install_agent == True
-
-- name: Zabbix | RedHat | Make sure Zabbix agent is enabled
-  become: yes
-  service:
-    name: "{{ zabbix_agent_service_name }}"
-    enabled: yes
-  when:
-    - zabbix_install_agent == True
-
-- name: Zabbix | RedHat | Make sure Zabbix server is installed
-  become: yes
-  yum:
-    name: "zabbix-server-{{ zabbix_server_db_type | lower }}"
-    state: latest
-    enablerepo: zabbix-deprecated
-  when:
-    - zabbix_install_server == True
-
-- name: Zabbix | RedHat | Make sure Zabbix server is enabled
-  become: yes
-  service:
-    name: "{{ zabbix_server_service_name }}"
-    enabled: yes
-  when:
-    - zabbix_install_server == True
-
-- name: Zabbix | RedHat | Make sure Zabbix server frontend is installed
-  become: yes
-  yum:
-    name: "zabbix-web-{{ zabbix_server_db_type | lower }}"
-    state: latest
-    enablerepo: zabbix-deprecated
-  when:
-    - zabbix_install_frontend == True
-
-- name: Zabbix | RedHat | Make sure Zabbix proxy is installed
-  become: yes
-  yum:
-    name: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
-    state: latest
-    enablerepo: zabbix-deprecated
-  when:
-    - zabbix_install_proxy == True
-
-- name: Zabbix | RedHat | Make sure Zabbix proxy is enabled
-  become: yes
-  service:
-    name: "{{ zabbix_proxy_service_name }}"
-    enabled: yes
-  when:
-    - zabbix_install_proxy == True

@@ -1,0 +1,12 @@
+---
+- name: Zabbix | Debian | Update apt cache with new zabbix proxy versions
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Zabbix | Debian | Make sure Zabbix proxy is installed
+  become: yes
+  apt:
+    pkg: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
+    state: latest

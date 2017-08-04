@@ -1,0 +1,12 @@
+---
+- name: Zabbix | Debian | Update apt cache with new zabbix frontend versions
+  become: yes
+  apt:
+    update_cache: yes
+    cache_valid_time: 3600
+
+- name: Zabbix | Debian | Make sure Zabbix server frontend is installed
+  become: yes
+  apt:
+    pkg: zabbix-frontend-php
+    state: latest

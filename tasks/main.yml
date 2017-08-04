@@ -6,14 +6,75 @@
   when:
     - ansible_os_family == "RedHat"
 
-- include: pkg-windows.yml
+- include: pkg-CentOs-agent.yml
   when:
-    - ansible_os_family == "Windows"
+    - ansible_os_family == "RedHat"
+    - zabbix_install_agent
+
+- include: pkg-CentOs-proxy.yml
+  when:
+    - ansible_os_family == "RedHat"
+    - zabbix_install_proxy
+
+- include: pkg-CentOs-server.yml
+  when:
+    - ansible_os_family == "RedHat"
+    - zabbix_install_server
+
+- include: pkg-CentOs-frontend.yml
+  when:
+    - ansible_os_family == "RedHat"
+    - zabbix_install_frontend
 
 - include: pkg-Debian.yml
   when:
     - ansible_os_family == "Debian"
 
-- include: configure.yml
+- include: pkg-Debian-agent.yml
+  when:
+    - ansible_os_family == "Debian"
+    - zabbix_install_agent
+
+- include: pkg-Debian-proxy.yml
+  when:
+    - ansible_os_family == "Debian"
+    - zabbix_install_proxy
+
+- include: pkg-Debian-server.yml
+  when:
+    - ansible_os_family == "Debian"
+    - zabbix_install_server
+
+- include: pkg-Debian-frontend.yml
+  when:
+    - ansible_os_family == "Debian"
+    - zabbix_install_frontend
+
+- include: pkg-Windows-agent.yml
+  when:
+    - ansible_os_family == "Windows"
+
+- include: configure-agent-Windows.yml
+  when:
+    - ansible_os_family == "Windows"
+    - zabbix_install_agent
+
+- include: configure-agent.yml
   when:
     - ansible_os_family != "Windows"
+    - zabbix_install_agent
+
+- include: configure-proxy.yml
+  when:
+    - ansible_os_family != "Windows"
+    - zabbix_install_proxy
+
+- include: configure-server.yml
+  when:
+    - ansible_os_family != "Windows"
+    - zabbix_install_server
+
+- include: configure-frontend.yml
+  when:
+    - ansible_os_family != "Windows"
+    - zabbix_install_frontend

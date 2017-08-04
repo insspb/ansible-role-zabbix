@@ -1,10 +1,11 @@
-- name: Zabbix | Debian | Make sure the ansible required dependencies are installed
+---
+- name: Zabbix | Debian | General | Make sure the ansible required dependencies are installed
   become: yes
   apt:
     pkg: python-pycurl
     state: present
 
-- name: Zabbix | Debian | Add the Zabbix repository
+- name: Zabbix | Debian | General | Add the Zabbix repository
   become: yes
   register: fresh_repo
   apt:
@@ -12,55 +13,9 @@
     state: present
     update_cache: yes
 
-- name: Zabbix | Debian | Update apt cache with new repo data
+- name: Zabbix | Debian | General | Update apt cache with new repo data
   become: yes
   apt:
     update_cache: yes
   when:
     - fresh_repo.changed == True
-
-- name: Zabbix | Debian | Update apt cache with new zabbix agent versions
-  become: yes
-  apt:
-    update_cache: yes
-    cache_valid_time: 3600
-
-- name: Zabbix | Debian | Make sure Zabbix agent is installed
-  become: yes
-  apt:
-    pkg: zabbix-agent
-    state: latest
-  when:
-    - zabbix_install_agent == True
-
-- name: Zabbix | Debian | Make sure Zabbix server is installed
-  become: yes
-  apt:
-    pkg: "zabbix-server-{{ zabbix_server_db_type | lower }}"
-    state: latest
-  when:
-    - zabbix_install_server == True
-
-- name: Zabbix | Debian | Make sure additional packages installed for Zabbix server
-  become: yes
-  apt:
-    pkg: snmp-mibs-downloader
-    state: latest
-  when:
-    - zabbix_install_server == True
-
-- name: Zabbix | Debian | Make sure Zabbix server frontend is installed
-  become: yes
-  apt:
-    pkg: zabbix-frontend-php
-    state: latest
-  when:
-    - zabbix_install_frontend == True
-
-- name: Zabbix | Debian | Make sure Zabbix proxy is installed
-  become: yes
-  apt:
-    pkg: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
-    state: latest
-  when:
-    - zabbix_install_proxy == True

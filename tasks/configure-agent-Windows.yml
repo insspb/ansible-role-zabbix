@@ -1,0 +1,7 @@
+---
+- name: Zabbix | Windows | Configure| Agent | Zabbix agent general configuration
+  win_template:
+    src: 'templates/windows/zabbix_agentd.conf.j2'
+    dest: 'C:\ProgramData\zabbix\zabbix_agentd.conf'
+  notify: Zabbix | Windows | Restart agent service
+

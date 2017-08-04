@@ -1,0 +1,23 @@
+---
+- name: Zabbix | Configure | Proxy | Zabbix proxy general configuration
+  become: yes
+  template:
+    src: "{{ zabbix_install_version }}/zabbix_proxy.conf.j2"
+    dest: "/etc/zabbix/zabbix_proxy.conf"
+    mode: 0644
+    backup: yes
+  notify: Zabbix | Zabbix | Restart proxy service
+
+- name: Zabbix | Configure | Proxy | Zabbix proxy PSK encryption configuration
+  become: yes
+  template:
+    src: "zabbix_proxy.psk.j2"
+    dest: "{{ zabbix_proxy_TLSPSKFile }}"
+    mode: 0644
+    backup: yes
+  when:
+    - zabbix_proxy_TLSPSK is defined
+    - zabbix_proxy_TLSPSKIdentity is defined
+    - zabbix_proxy_TLSPSK != ""
+    - zabbix_proxy_TLSPSKIdentity != ""
+  notify: Zabbix | Zabbix | Restart proxy service

@@ -1,0 +1,7 @@
+---
+- name: Zabbix | RedHat | Make sure Zabbix server frontend is installed
+  become: yes
+  yum:
+    name: "zabbix-web-{{ zabbix_server_db_type | lower }}"
+    state: latest
+    enablerepo: zabbix-deprecated

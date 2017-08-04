@@ -1,0 +1,32 @@
+---
+- name: Zabbix | Configure | Agent | Zabbix agent general configuration
+  become: yes
+  template:
+    src: "{{ zabbix_install_version }}/zabbix_agentd.conf.j2"
+    dest: "/etc/zabbix/zabbix_agentd.conf"
+    mode: 0644
+    backup: yes
+  notify: Zabbix | Zabbix | Restart agent service
+
+- name: Zabbix | Configure | Agent | Zabbix agent checking agentd subconfiguration folder exist
+  become: yes
+  file:
+    state: directory
+    path: "/etc/zabbix/zabbix_agentd.d"
+    owner: "root"
+    group: "root"
+    mode: 0755
+
+- name: Zabbix | Configure | Agent | Zabbix agent PSK encryprion configuration
+  become: yes
+  template:
+    src: "zabbix_agent.psk.j2"
+    dest: "{{ zabbix_agent_TLSPSKFile }}"
+    mode: 0644
+    backup: yes
+  when:
+    - zabbix_agent_TLSPSK is defined
+    - zabbix_agent_TLSPSKIdentity is defined
+    - zabbix_agent_TLSPSK != ""
+    - zabbix_agent_TLSPSKIdentity != ""
+  notify: Zabbix | Zabbix | Restart agent service

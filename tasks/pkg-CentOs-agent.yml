@@ -1,0 +1,13 @@
+---
+- name: Zabbix | RedHat | Make sure Zabbix agent is installed
+  become: yes
+  yum:
+    name: zabbix-agent
+    state: latest
+    enablerepo: zabbix-deprecated
+
+- name: Zabbix | RedHat | Make sure Zabbix agent is enabled
+  become: yes
+  service:
+    name: "{{ zabbix_agent_service_name }}"
+    enabled: yes
