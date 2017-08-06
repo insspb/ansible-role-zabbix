@@ -11,15 +11,35 @@
     - ansible_os_family == "RedHat"
     - zabbix_install_agent
 
-- include: pkg-CentOs-proxy.yml
+- include: pkg-CentOs-proxy-sqlite3.yml
   when:
     - ansible_os_family == "RedHat"
     - zabbix_install_proxy
+    - zabbix_proxy_db_type == "sqlite3"
 
-- include: pkg-CentOs-server.yml
+- include: pkg-CentOs-proxy-mysql.yml
+  when:
+    - ansible_os_family == "RedHat"
+    - zabbix_install_proxy
+    - zabbix_proxy_db_type == "mysql"
+
+- include: pkg-CentOs-proxy-pgsql.yml
+  when:
+    - ansible_os_family == "RedHat"
+    - zabbix_install_proxy
+    - zabbix_proxy_db_type == "pgsql"
+
+- include: pkg-CentOs-server-mysql.yml
   when:
     - ansible_os_family == "RedHat"
     - zabbix_install_server
+    - zabbix_server_db_type == "mysql"
+
+- include: pkg-CentOs-server-pgsql.yml
+  when:
+    - ansible_os_family == "RedHat"
+    - zabbix_install_server
+    - zabbix_server_db_type == "pgsql"
 
 - include: pkg-CentOs-frontend.yml
   when:
@@ -35,15 +55,36 @@
     - ansible_os_family == "Debian"
     - zabbix_install_agent
 
-- include: pkg-Debian-proxy.yml
+- include: pkg-Debian-proxy-sqlite3.yml
   when:
     - ansible_os_family == "Debian"
     - zabbix_install_proxy
+    - zabbix_proxy_db_type == "sqlite3"
 
-- include: pkg-Debian-server.yml
+- include: pkg-Debian-proxy-mysql.yml
+  when:
+    - ansible_os_family == "Debian"
+    - zabbix_install_proxy
+    - zabbix_proxy_db_type == "mysql"
+
+- include: pkg-Debian-proxy-pgsql.yml
+  when:
+    - ansible_os_family == "Debian"
+    - zabbix_install_proxy
+    - zabbix_proxy_db_type == "pgsql"
+
+- include: pkg-Debian-server-mysql.yml
   when:
     - ansible_os_family == "Debian"
     - zabbix_install_server
+    - zabbix_server_db_type == "mysql"
+
+- include: pkg-Debian-server-pgsql.yml
+  when:
+    - ansible_os_family == "Debian"
+    - zabbix_install_server
+    - zabbix_server_db_type == "pgsql"
+
 
 - include: pkg-Debian-frontend.yml
   when:
