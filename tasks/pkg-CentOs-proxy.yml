@@ -39,7 +39,7 @@
     group: zabbix
     mode: 0755
   when:
-    - zabbix_server_db_type == "sqlite3"
+    - zabbix_proxy_db_type == "sqlite3"
     - proxy_db_file.stat.exists == false
   notify:
     - Zabbix | Zabbix | Restart proxy service
