@@ -14,5 +14,5 @@
 - name: Zabbix | Debian | Make sure additional packages installed for Zabbix server
   become: yes
   apt:
-    pkg: snmp-mibs-downloader
+    pkg: snmp
     state: latest
