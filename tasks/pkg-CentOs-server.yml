@@ -5,6 +5,17 @@
     name: "zabbix-server-{{ zabbix_server_db_type | lower }}"
     state: latest
     enablerepo: zabbix-deprecated
+  when:
+    - ansible_distribution_major_version == "6"
+
+- name: Zabbix | RedHat | Make sure Zabbix server is installed
+  become: yes
+  yum:
+    name: "zabbix-server-{{ zabbix_server_db_type | lower }}"
+    state: latest
+  when:
+    - ansible_distribution_major_version == "7"
+
 
 - name: Zabbix | RedHat | Make sure Zabbix server is enabled
   become: yes

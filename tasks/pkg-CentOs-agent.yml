@@ -5,6 +5,16 @@
     name: zabbix-agent
     state: latest
     enablerepo: zabbix-deprecated
+  when:
+    - ansible_distribution_major_version == "6"
+
+- name: Zabbix | RedHat | Make sure Zabbix agent is installed
+  become: yes
+  yum:
+    name: zabbix-agent
+    state: latest
+  when:
+    - ansible_distribution_major_version == "7"
 
 - name: Zabbix | RedHat | Make sure Zabbix agent is enabled
   become: yes
