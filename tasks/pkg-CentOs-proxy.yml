@@ -4,10 +4,43 @@
   yum:
     name: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
     state: latest
+  when:
+    - ansible_distribution_major_version == "7"
+
+- name: Zabbix | RedHat | Make sure Zabbix proxy is installed
+  become: yes
+  yum:
+    name: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
+    state: latest
     enablerepo: zabbix-deprecated
+  when:
+    - ansible_distribution_major_version == "6"
 
 - name: Zabbix | RedHat | Make sure Zabbix proxy is enabled
   become: yes
   service:
     name: "{{ zabbix_proxy_service_name }}"
     enabled: yes
+
+- name: Zabbix | RedHat | Check database file exist
+  register: proxy_db_file
+  stat:
+    get_md5: false
+    get_checksum: false
+    path: "{{ zabbix_proxy_DBName }}"
+
+- name: Zabbix | RedHat | Create zabbix proxy db directory for sqlite3 db
+  become: yes
+  file:
+    path: "{{ zabbix_proxy_DBName | dirname }}"
+    state: directory
+    recurse: no
+    owner: zabbix
+    group: zabbix
+    mode: 0755
+  when:
+    - zabbix_server_db_type == "sqlite3"
+    - proxy_db_file.stat.exists == false
+  notify:
+    - Zabbix | Zabbix | Restart proxy service
+
