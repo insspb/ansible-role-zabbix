@@ -5,8 +5,36 @@
     update_cache: yes
     cache_valid_time: 3600
 
+- name: Zabbix | Debian | Make sure additional packages installed for Zabbix proxy
+  become: yes
+  apt:
+    pkg: snmp
+    state: latest
+
 - name: Zabbix | Debian | Make sure Zabbix proxy is installed
   become: yes
   apt:
     pkg: "zabbix-proxy-{{ zabbix_proxy_db_type | lower }}"
     state: latest
+
+- name: Zabbix | Debian | Check database file exist
+  register: proxy_db_file
+  stat:
+    get_md5: false
+    get_checksum: false
+    path: "{{ zabbix_proxy_DBName }}"
+
+- name: Zabbix | Debian | Create zabbix proxy db directory for sqlite3 db
+  become: yes
+  file:
+    path: "{{ zabbix_proxy_DBName | dirname }}"
+    state: directory
+    recurse: no
+    owner: zabbix
+    group: zabbix
+    mode: 0755
+  when:
+    - zabbix_server_db_type == "sqlite3"
+    - proxy_db_file.stat.exists == false
+  notify:
+    - Zabbix | Zabbix | Restart proxy service
