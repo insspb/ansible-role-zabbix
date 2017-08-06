@@ -3,3 +3,12 @@
   win_chocolatey:
     name: zabbix-agent
     state: present
+  when:
+    - zabbix_install_agent == true
+
+- name: Zabbix | Windows | Remove zabbix agent with chocolate
+  win_chocolatey:
+    name: zabbix-agent
+    state: absent
+  when:
+    - zabbix_install_agent == false
